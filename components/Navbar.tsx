@@ -23,7 +23,7 @@ export default function Navbar() {
                                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-900 outline-none focus:outline-none text-white">
                                     <div className="flex items-start justify-between p-5 border-solid rounded-t">
                                         <Link href="/" passHref>
-                                            <div className="text-3xl font-base tracking-wide cursor-pointer">
+                                            <div className="text-2xl font-base tracking-wide cursor-pointer">
                                                 StreamWeave
                                             </div>
                                         </Link>

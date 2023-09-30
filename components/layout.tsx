@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div>
             <Head>
                 <title>StreamWeave</title>
-                <meta name="description" content="Decentralised Video Streaming Platform without any policies" />
+                <meta name="description" content="Decentralised Video Streaming Platform witout any censorship or policies." />
             </Head>
 
             <div className='font-montserrat'>
