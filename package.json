@@ -18,7 +18,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "uuid": "^9.0.1",
-    "web3": "^4.1.2"
+    "web3": "^1.10.1"
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
