@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import mysql from 'mysql2/promise';
+import mysql, { RowDataPacket } from 'mysql2/promise';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
@@ -24,10 +24,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await connection.end();
 
-    if (rows.length === 0) {
+    if ((rows as RowDataPacket[]).length === 0) {
+
       res.status(404).json({ error: 'Video not found' });
     } else {
-      res.status(200).json(rows[0]);
+      res.status(200).json((rows as RowDataPacket[])[0]);
+
     }
   } catch (error) {
     console.error('Error:', error);
