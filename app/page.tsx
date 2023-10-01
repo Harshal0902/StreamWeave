@@ -5,6 +5,7 @@ import Link from 'next/link';
 import VideoCard from './_components/VideoCard';
 import SearchBar from './_components/SearchBar';
 import axios from 'axios';
+import { motion } from "framer-motion"
 
 interface Video {
   id: string;
@@ -66,32 +67,35 @@ const Page: React.FC = () => {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
+
       <div className="flex justify-center items-center py-8 mx-8">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {searchTerm ? (
             filteredData.map((item) => (
-              <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
+              <motion.div layout>
+                <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
                   <VideoCard
                     imageSrc={item.thumbnail_url}
                     title={item.title}
                     description={item.description}
                     videoUrl={item.video_url}
                   />
-              </Link>
+                </Link>
+              </motion.div>
             ))
           ) : (
             data.map((item) => (
               <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
-                  <VideoCard
-                    imageSrc={item.thumbnail_url}
-                    title={item.title}
-                    description={item.description}
-                    videoUrl={item.video_url}
-                  />
+                <VideoCard
+                  imageSrc={item.thumbnail_url}
+                  title={item.title}
+                  description={item.description}
+                  videoUrl={item.video_url}
+                />
               </Link>
             ))
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

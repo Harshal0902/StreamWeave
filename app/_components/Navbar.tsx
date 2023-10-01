@@ -3,13 +3,14 @@
 import React, { useState } from 'react'
 import Link from 'next/link';
 import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
-
+import { motion } from "framer-motion"
+import { fadeNav } from "../animation"
 export default function Navbar() {
 
     const [showNavbar, setShowNavbar] = useState(false);
 
     return (
-        <div className="z-50 w-full">
+        <motion.div variants={fadeNav} initial="hidden" animate="visible" className="z-50 w-full">
             <nav className="flex items-center bg-primary py-2 flex-wrap px-4 tracking-wider">
                 <Link href="/" passHref><span className="p-2 mr-4 inline-flex items-center text-2xl md:text-5xl cursor-pointer font-base text-white">StreamWeave
                 </span></Link>
@@ -73,6 +74,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-        </div>
+        </motion.div>
     )
 }

@@ -6,6 +6,8 @@ import VideoCard from '../../_components/VideoCard';
 import Web3 from 'web3';
 import { AiOutlineClose } from 'react-icons/ai';
 import axios from 'axios';
+import { motion } from "framer-motion"
+import { fade, fadeLogo } from '../../animation';
 
 interface Video {
     id: string;
@@ -49,18 +51,18 @@ export default function Page({ params }: { params: { id: string } }) {
             if (typeof window.ethereum === 'undefined') {
                 throw new Error('MetaMask is not installed.');
             }
-    
+
             const web3 = new Web3(window.ethereum);
             await window.ethereum.enable();
             const accounts = await web3.eth.getAccounts();
-    
+
             if (accounts.length === 0) {
                 throw new Error('No Ethereum accounts found in MetaMask.');
             }
-    
+
             const senderAddress = accounts[0];
             const amountWei = web3.utils.toWei(donationAmount, 'ether');
-    
+
             // Check if videoDetails is not null before accessing wallet_address
             if (videoDetails) {
                 await web3.eth.sendTransaction({
@@ -77,7 +79,7 @@ export default function Page({ params }: { params: { id: string } }) {
             console.error('Error sending cryptocurrency:', error.message);
         }
     };
-    
+
 
     return (
         <div className='py-6 md:mx-36 mx-4'>
@@ -86,7 +88,7 @@ export default function Page({ params }: { params: { id: string } }) {
                     <p className='text-3xl text-white'>Loading...</p>
                 </div>
             ) : videoDetails ? (
-                <div className='w-full grid place-items-center'>
+                <motion.div variants={fadeLogo} initial="hidden" animate="visible" className='w-full grid place-items-center'>
                     <video className="md:w-3/4 rounded-t-xl" id="player" controls playsInline>
                         <source src={videoDetails.video_url} type='video/mp4' />
                         Your browser does not support the video tag.
@@ -144,21 +146,25 @@ export default function Page({ params }: { params: { id: string } }) {
                     )}
 
                     <div className="py-8">
-                        <h2 className="text-2xl font-semibold px-6 text-white py-4">More Videos</h2>
-                        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 px-6">
+                        <motion.div variants={fadeLogo} initial="hidden" animate="visible">
+                            <h2 className="text-2xl font-semibold px-6 text-white py-4">More Videos</h2>
+                        </motion.div>
+                        <motion.div layout className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 px-6">
                             {allVideos.map((video) => (
-                                <Link key={video.id} href={`/player/${video.id}`} as={`/player/${video.id}`}>
-                                    <VideoCard
-                                        imageSrc={video.thumbnail_url}
-                                        title={video.title}
-                                        description={video.description}
-                                        videoUrl={video.video_url}
-                                    />
-                                </Link>
+                                <motion.div layout>
+                                    <Link key={video.id} href={`/player/${video.id}`} as={`/player/${video.id}`}>
+                                        <VideoCard
+                                            imageSrc={video.thumbnail_url}
+                                            title={video.title}
+                                            description={video.description}
+                                            videoUrl={video.video_url}
+                                        />
+                                    </Link>
+                                </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     </div>
-                </div>
+                </motion.div>
             ) : (
                 <div className='flex items-center justify-center pt-56'>
                     <p className='text-3xl text-white'>Video not found</p>

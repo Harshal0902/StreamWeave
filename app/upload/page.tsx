@@ -7,6 +7,8 @@ import Plyr from 'plyr';
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { motion } from "framer-motion"
+import { fadeLogo } from '../animation'
 
 interface PostData {
     title: string;
@@ -220,10 +222,10 @@ export default function UploadOthent() {
 
     return (
         <div className='grid place-items-center pb-20 pt-12'>
-            <div className="grid place-items-center pb-4">
+            <motion.div variants={fadeLogo} initial="hidden" animate="visible" className="grid place-items-center pb-4">
                 <h1 className="text-3xl md:text-5xl text-center text-white font-semibold">Upload video</h1>
                 <div className="bg-secondary w-52 h-1 my-2 rounded-md"></div>
-            </div>
+            </motion.div>
 
             {!user ? (
                 <div className="mt-36">
