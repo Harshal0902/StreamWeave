@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import VideoCard from '../components/VideoCard';
 import SearchBar from '../components/SearchBar';
+import axios from 'axios'; // Import Axios
 
 interface Video {
   id: string;
@@ -21,11 +22,8 @@ const Page: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/getVideo');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
+        const response = await axios.get('/api/getVideo');
+        const data = response.data;
         setData(data);
         setLoading(false);
       } catch (error) {

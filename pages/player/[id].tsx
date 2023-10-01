@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import VideoCard from '../../components/VideoCard';
 import Web3 from 'web3';
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from 'react-icons/ai';
+import axios from 'axios'; // Import Axios
 
 interface Video {
     id: string;
@@ -26,11 +27,8 @@ const VideoDetails: React.FC = () => {
     useEffect(() => {
         async function fetchVideo() {
             try {
-                const response = await fetch(`/api/player?id=${id}`);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const videoData = await response.json();
+                const response = await axios.get(`/api/player?id=${id}`); // Use Axios to fetch data
+                const videoData = response.data;
                 setVideo(videoData);
             } catch (error) {
                 console.error('Error fetching video:', error);
@@ -39,11 +37,8 @@ const VideoDetails: React.FC = () => {
 
         async function fetchAllVideos() {
             try {
-                const response = await fetch('/api/getVideo');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const videoList = await response.json();
+                const response = await axios.get('/api/getVideo'); // Use Axios to fetch data
+                const videoList = response.data;
                 setVideos(videoList);
             } catch (error) {
                 console.error('Error fetching videos:', error);
@@ -59,11 +54,8 @@ const VideoDetails: React.FC = () => {
 
     const handleVideoClick = async (newId: string) => {
         try {
-            const response = await fetch(`/api/player?id=${newId}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const videoData = await response.json();
+            const response = await axios.get(`/api/player?id=${newId}`); // Use Axios to fetch data
+            const videoData = response.data;
             setVideo(videoData);
 
             const videoElement = document.getElementById('player') as HTMLVideoElement;
@@ -92,19 +84,15 @@ const VideoDetails: React.FC = () => {
             if (typeof window.ethereum === 'undefined') {
                 throw new Error('MetaMask is not installed.');
             }
-            // @ts-ignore
+            //   @ts-ignore
             const web3 = new Web3(window.ethereum);
-
-            // @ts-ignore
+            //   @ts-ignore
             await window.ethereum.enable();
-
-            // @ts-ignore
             const accounts = await web3.eth.getAccounts();
             if (accounts.length === 0) {
                 throw new Error('No Ethereum accounts found in MetaMask.');
             }
             const senderAddress = accounts[0];
-
             const amountWei = web3.utils.toWei(amount, 'ether');
 
             await web3.eth.sendTransaction({
