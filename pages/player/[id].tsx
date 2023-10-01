@@ -182,7 +182,7 @@ const VideoDetails: React.FC = () => {
 
             <div className="py-8 px-4">
                 <h2 className="text-2xl font-semibold px-6 text-white py-4">More Videos</h2>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 px-6">
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 px-6">
                     {videos.map((item) => (
                         <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
                             <a onClick={() => handleVideoClick(item.id)}>

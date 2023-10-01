@@ -3,6 +3,7 @@ import { Othent } from 'othent';
 import 'plyr/dist/plyr.css';
 import Plyr from 'plyr';
 import axios from 'axios';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 interface PostData {
@@ -78,7 +79,7 @@ export default function UploadOthent() {
             setOthent(othentInstance);
         };
         initializeOthent();
-    }, []);
+    }, [othnetAPI]);
 
     useEffect(() => {
         const player = new Plyr('#player');
@@ -199,7 +200,7 @@ export default function UploadOthent() {
             }
         };
         initializeOthent();
-    }, []);
+    }, [othnetAPI]);
 
     async function logIn() {
         try {
@@ -226,7 +227,8 @@ export default function UploadOthent() {
                 <div className="mt-36">
                     <button className='flex flex-row space-x-2 bg-white px-4 py-2 rounded-lg' onClick={logIn}>
                         <h1 className='text-xl pr-3'>Log In using Google</h1>
-                        <img src="/google_icon-iconscom_62736.png" alt="profile" className='ml-8' height={25} width={25} />
+                        {/* <img src="/google_icon-iconscom_62736.png" alt="profile" className='ml-8' height={25} width={25} /> */}
+                        <Image src="/google_icon-iconscom_62736.png" alt="profile" className='ml-8' height={25} width={25} />
                     </button>
                 </div>
             ) : (
@@ -237,8 +239,9 @@ export default function UploadOthent() {
 
                         <div className='float-right mr-4 py-4 space-y-2'>
                             <div className='flex flex-row items-center justify-center space-x-2 pt-2'>
-                                <h1 className='text-center text-md text-white'>{user.email}</h1>
-                                <img src={user.picture} alt="avatar" className='mt-1 rounded-full' width={40} height={40} />
+                                <h1 className='text-center text-md text-white mr-2'>{user.email}</h1>
+                                {/* <img src={user.picture} alt="avatar" className='mt-1 rounded-full' width={40} height={40} /> */}
+                                <Image src={user.picture} alt="avatar" className='mt-1 rounded-full' width={25} height={25} />
                             </div>
                             <button className='float-right bg-secondary text-[1rem] text-white px-2 py-1 rounded-md' onClick={logOut}>
                                 Log Out
@@ -247,7 +250,7 @@ export default function UploadOthent() {
 
                     </div>
 
-                    <form onSubmit={handleSubmit} className="min-w-[70vw] mx-4 p-8 bg-white rounded-lg shadow-md">
+                    <form onSubmit={handleSubmit} className="min-w-[70vw]  md:mx-4 p-8 bg-white rounded-lg shadow-md">
                         <h1 className="text-2xl font-semibold mb-4">Upload Video</h1>
                         <div className='grid md:flex'>
                             {/* Left Column */}
@@ -303,7 +306,8 @@ export default function UploadOthent() {
                                 </div>
                                 {selectedThumbPreview && (
                                     <div className="mb-4">
-                                        <img className="w-44 h-32 object-cover rounded-xl" src={selectedThumbPreview} />
+                                        {/* <img className="w-44 h-32 object-cover rounded-xl" src={selectedThumbPreview} /> */}
+                                        <Image className="object-cover rounded-xl" alt='thumbnail' src={selectedThumbPreview} width={360} height={250} />
                                     </div>
                                 )}
                             </div>
