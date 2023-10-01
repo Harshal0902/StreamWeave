@@ -16,21 +16,19 @@ interface PostData {
 }
 
 export default function UploadOthent() {
-    const [video, setVideo] = useState<File | null>(null);
-    const [thumb, setThumb] = useState<File | null>(null);
-    const [paymentOption, setPaymentOption] = useState('free');
-    const [selectedVideoPreview, setSelectedVideoPreview] = useState<string | null>(null);
-    const [selectedThumbPreview, setSelectedThumbPreview] = useState<string | null>(null);
     const router = useRouter();
 
+    const othnetAPI = process.env.NEXT_PUBLIC_APP_ID
+
+    const [video, setVideo] = useState<File | null>(null);
+    const [thumb, setThumb] = useState<File | null>(null);
+    const [selectedVideoPreview, setSelectedVideoPreview] = useState<string | null>(null);
+    const [selectedThumbPreview, setSelectedThumbPreview] = useState<string | null>(null);
     // @ts-ignore
     const [othent, setOthent] = useState<Othent | ''>('');
     const [user, setUser] = useState<any>();
     const [txId, setTxId] = useState('');
     const [txIdThumb, setTxIdThumb] = useState('');
-
-    const othnetAPI = process.env.NEXT_PUBLIC_APP_ID
-
     const [postData, setPostData] = useState<PostData>({
         title: '',
         description: '',
@@ -81,13 +79,6 @@ export default function UploadOthent() {
         };
         initializeOthent();
     }, [othnetAPI]);
-
-    // useEffect(() => {
-    //     const player = new Plyr('#player');
-    //     return () => {
-    //         player.destroy();
-    //     };
-    // }, []);
 
     async function logOut() {
         const logOutResponse = await othent!.logOut();
@@ -172,24 +163,6 @@ export default function UploadOthent() {
         }
     }
 
-    const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedVideo = event.target.files?.[0];
-        // @ts-ignore
-        setVideo(selectedVideo);
-
-        if (selectedVideo) {
-            const videoURL = URL.createObjectURL(selectedVideo);
-            setSelectedVideoPreview(videoURL);
-        } else {
-            setSelectedVideoPreview(null);
-        }
-    };
-
-    const handlePaymentOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setPaymentOption(event.target.value);
-    };
-
-
     useEffect(() => {
         const initializeOthent = async () => {
             try {
@@ -228,7 +201,6 @@ export default function UploadOthent() {
                 <div className="mt-36">
                     <button className='flex flex-row space-x-2 bg-white px-4 py-2 rounded-lg' onClick={logIn}>
                         <h1 className='text-xl pr-3'>Log In using Google</h1>
-                        {/* <img src="/google_icon-iconscom_62736.png" alt="profile" className='ml-8' height={25} width={25} /> */}
                         <Image src="/google_icon-iconscom_62736.png" alt="profile" className='ml-8' height={25} width={25} />
                     </button>
                 </div>
@@ -241,7 +213,6 @@ export default function UploadOthent() {
                         <div className='float-right mr-4 py-4 space-y-2'>
                             <div className='flex flex-row items-center justify-center space-x-2 pt-2'>
                                 <h1 className='text-center text-md text-white mr-2'>{user.email}</h1>
-                                {/* <img src={user.picture} alt="avatar" className='mt-1 rounded-full' width={40} height={40} /> */}
                                 <Image src={user.picture} alt="avatar" className='mt-1 rounded-full' width={25} height={25} />
                             </div>
                             <button className='float-right bg-secondary text-[1rem] text-white px-2 py-1 rounded-md' onClick={logOut}>
@@ -268,14 +239,7 @@ export default function UploadOthent() {
                                         disabled={!user}
                                         required
                                     />
-                                    {/* <input
-                                        value={`https://arweave.net/${txId}`}
-                                        className="mt-2 border border-gray-300 rounded w-full px-3 py-2"
-                                        readOnly
-                                        name="video_url" onChange={handleChange}
-                                    /> */}
                                     <input type="text" className='hidden' name="video_url" value={postData.video_url} onChange={handleChange} placeholder="Video URL" />
-
                                 </div>
                                 {selectedVideoPreview && (
                                     <div className="mb-4">
@@ -307,7 +271,6 @@ export default function UploadOthent() {
                                 </div>
                                 {selectedThumbPreview && (
                                     <div className="mb-4">
-                                        {/* <img className="w-44 h-32 object-cover rounded-xl" src={selectedThumbPreview} /> */}
                                         <Image className="object-cover rounded-xl" alt='thumbnail' src={selectedThumbPreview} width={360} height={250} />
                                     </div>
                                 )}
