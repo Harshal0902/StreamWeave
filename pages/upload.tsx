@@ -27,7 +27,7 @@ export default function UploadOthent() {
     const [txId, setTxId] = useState('');
     const [txIdThumb, setTxIdThumb] = useState('');
 
-    const othnetAPI = process.env.APP_ID
+    const othnetAPI = process.env.NEXT_PUBLIC_APP_ID
 
     const [postData, setPostData] = useState<PostData>({
         title: '',
