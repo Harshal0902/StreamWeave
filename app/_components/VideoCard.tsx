@@ -27,12 +27,11 @@ const VideoCard: React.FC<CardProps> = ({ videoUrl, imageSrc, title, description
 
     return (
         <div className="cursor-pointer rounded-xl overflow-hidden bg-white shadow-lg">
-            <Image className="object-cover" src={imageSrc} alt={title} width={360} height={100} />
+            <img className="object-cover" src={imageSrc} alt={title} width={360} height={100} />
             <div className="px-4 py-2">
                 <div className="font-bold text-xl mb-2">{title}</div>
                 <p className="text-gray-800 text-base">
                     {truncatedDescription}
-                    {description}
                 </p>
                 {videoDuration !== null && (
                     <p className="text-gray-600">Duration: {videoDuration.toFixed(2)} seconds</p>
