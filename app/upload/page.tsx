@@ -2,9 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { Othent } from 'othent';
-import 'plyr/dist/plyr.css';
-import Plyr from 'plyr';
-import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion"
@@ -85,12 +82,12 @@ export default function UploadOthent() {
         initializeOthent();
     }, [othnetAPI]);
 
-    useEffect(() => {
-        const player = new Plyr('#player');
-        return () => {
-            player.destroy();
-        };
-    }, []);
+    // useEffect(() => {
+    //     const player = new Plyr('#player');
+    //     return () => {
+    //         player.destroy();
+    //     };
+    // }, []);
 
     async function logOut() {
         const logOutResponse = await othent!.logOut();
