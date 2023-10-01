@@ -200,8 +200,8 @@ export default function UploadOthent() {
             {!user ? (
                 <div className="mt-36">
                     <button className='flex flex-row space-x-2 bg-white px-4 py-2 rounded-lg' onClick={logIn}>
-                        <h1 className='text-xl pr-3'>Log In using Google</h1>
-                        <Image src="/google_icon-iconscom_62736.png" alt="profile" className='ml-8' height={25} width={25} />
+                        <h1 className='text-xl pr-3'>Log In using Othent</h1>
+                        <Image src="/118553412.png" alt="Othent" height={30} width={30} />
                     </button>
                 </div>
             ) : (

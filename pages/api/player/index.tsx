@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
 
-    const [rows] = await connection.query('SELECT * FROM test.video_info WHERE id = ?;', [id]);
+    const [rows] = await connection.query('SELECT * FROM streamweave.video_info WHERE id = ?;', [id]);
 
     await connection.end();
 

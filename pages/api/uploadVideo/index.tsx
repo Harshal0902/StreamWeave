@@ -39,7 +39,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         const id = uuidv4();
 
         connection.query(
-            'INSERT INTO test.video_info (id, title, description, video_url, thumbnail_url, wallet_address) VALUES (?, ?, ?, ?, ?, ?)',
+            'INSERT INTO streamweave.video_info (id, title, description, video_url, thumbnail_url, wallet_address) VALUES (?, ?, ?, ?, ?, ?)',
             [id, title, description, video_url, thumbnail_url, wallet_address],
             function (err, result) {
                 if (err) {

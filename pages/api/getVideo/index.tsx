@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
 
-    const [rows] = await connection.query(`SELECT * FROM test.video_info;`);
+    const [rows] = await connection.query(`SELECT * FROM streamweave.video_info;`);
     await connection.end();
 
     res.status(200).json(rows);
