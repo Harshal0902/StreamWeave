@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  images: {
-    domains: ['arweave.net', 'lh3.googleusercontent.com'],
-  },
-};
+    images: {
+        domains: ['arweave.net', 'lh3.googleusercontent.com'],
+    },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

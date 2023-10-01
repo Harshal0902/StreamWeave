@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import VideoCard from '../../components/VideoCard';
+import VideoCard from '../../app/_components/VideoCard';
 import Web3 from 'web3';
 import { AiOutlineClose } from 'react-icons/ai';
 import axios from 'axios'; // Import Axios
@@ -173,14 +173,14 @@ const VideoDetails: React.FC = () => {
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 px-6">
                     {videos.map((item) => (
                         <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
-                            <a onClick={() => handleVideoClick(item.id)}>
+                            {/* <a onClick={() => handleVideoClick(item.id)}> */}
                                 <VideoCard
                                     imageSrc={item.thumbnail_url}
                                     title={item.title}
                                     description={item.description}
                                     videoUrl={item.video_url}
                                 />
-                            </a>
+                            {/* </a> */}
                         </Link>
                     ))}
                 </div>

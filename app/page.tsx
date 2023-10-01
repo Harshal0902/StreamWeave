@@ -1,8 +1,10 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import VideoCard from '../components/VideoCard';
-import SearchBar from '../components/SearchBar';
-import axios from 'axios'; // Import Axios
+import VideoCard from './_components/VideoCard';
+import SearchBar from './_components/SearchBar';
+import axios from 'axios';
 
 interface Video {
   id: string;
@@ -64,32 +66,28 @@ const Page: React.FC = () => {
   return (
     <div>
       <SearchBar onSearch={handleSearch} />
-      <div className="flex justify-center items-center py-8">
+      <div className="flex justify-center items-center py-8 mx-8">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {searchTerm ? (
             filteredData.map((item) => (
               <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
-                <a>
                   <VideoCard
                     imageSrc={item.thumbnail_url}
                     title={item.title}
                     description={item.description}
                     videoUrl={item.video_url}
                   />
-                </a>
               </Link>
             ))
           ) : (
             data.map((item) => (
               <Link key={item.id} href={`/player/${item.id}`} as={`/player/${item.id}`}>
-                <a>
                   <VideoCard
                     imageSrc={item.thumbnail_url}
                     title={item.title}
                     description={item.description}
                     videoUrl={item.video_url}
                   />
-                </a>
               </Link>
             ))
           )}
